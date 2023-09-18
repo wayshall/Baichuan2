@@ -12,16 +12,16 @@ st.title("Baichuan 2")
 @st.cache_resource
 def init_model():
     model = AutoModelForCausalLM.from_pretrained(
-        "baichuan-inc/Baichuan2-7B-Chat",
+        "baichuan-inc/Baichuan2-13B-Chat-4bits",
         torch_dtype=torch.float16,
         device_map="auto",
         trust_remote_code=True
     )
     model.generation_config = GenerationConfig.from_pretrained(
-        "baichuan-inc/Baichuan2-7B-Chat"
+        "baichuan-inc/Baichuan2-13B-Chat-4bits"
     )
     tokenizer = AutoTokenizer.from_pretrained(
-        "baichuan-inc/Baichuan2-7B-Chat",
+        "baichuan-inc/Baichuan2-13B-Chat-4bits",
         use_fast=False,
         trust_remote_code=True
     )
@@ -34,7 +34,7 @@ def clear_chat_history():
 
 def init_chat_history():
     with st.chat_message("assistant", avatar='🤖'):
-        st.markdown("您好，我是百川大模型(7B)，很高兴为您服务🥰")
+        st.markdown("您好，我是百川大模型(int4)，很高兴为您服务🥰")
 
     if "messages" in st.session_state:
         for message in st.session_state.messages:
