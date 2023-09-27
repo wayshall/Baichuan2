@@ -1,10 +1,10 @@
 #!/bin/bash
 hostfile=""
-deepspeed --hostfile=$hostfile fine-tune.py  \
+deepspeed --hostfile=$hostfile ./fine-tune/fine-tune.py  \
     --report_to "none" \
     --data_path "data/cloudmicro.json" \
     --model_name_or_path "baichuan-inc/Baichuan2-7B-Chat" \
-    --output_dir "output" \
+    --output_dir "output/lora" \
     --model_max_length 512 \
     --num_train_epochs 80 \
     --per_device_train_batch_size 16 \
@@ -21,4 +21,4 @@ deepspeed --hostfile=$hostfile fine-tune.py  \
     --logging_steps 1 \
     --gradient_checkpointing True \
     --deepspeed ds_config.json \
-    --f16 True
+    --use_lora True
